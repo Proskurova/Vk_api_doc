@@ -4,7 +4,7 @@ import config as con
 res = RequestsVK(con.TOKEN, con.VERSION)
 
 
-def get_users(user_ids: str, fields: str = None, name_case='nom') -> list:
+def get_users(user_ids: str, fields: str = None, name_case: str = None) -> list:
     '''
     Returns extended user information.
         :param user_ids: A comma-separated string of id or screen_name

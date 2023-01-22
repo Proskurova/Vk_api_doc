@@ -1,7 +1,8 @@
 from requests_vk import RequestsVK
 import config as con
 
-res = RequestsVK(con.TOKEN, con.VERSION)
+res = RequestsVK(con.TOKEN, con.VERSION) #TOKEN- сервисный ключ доступа
+res_two = RequestsVK(con.access_token, con.VERSION) #access_token-ключ доступа пользователя
 
 
 def get_by_id_group(group_ids: str, group_id: str, fields: str = None) -> list:
@@ -47,3 +48,28 @@ def get_members(group_id: str, fields: str = None, filters: str = None, count=10
         'filter': filters
     }
     return res.make_request(method, params)
+
+
+def get_groups(user_id: int, fields: str = None, filters: str = None, count=100, extended=0, offset=0) -> dict:
+    '''
+    Returns a list of the specified user's communities.
+        :param user_id: ID of the user whose community information you want to get.
+        :param fields: A list of additional fields that need to be returned.
+        :param filters: A comma-separated list of community filters to be returned.
+        :param count: The number of community members that you need to get information about.
+        :param extended: If 1-full information about user groups returned
+        :param offset: The offset required to sample a specific subset of participants.
+    :return: The list of data with information about user.
+    '''
+    method = "groups.get"
+    params = {
+        'access_token': str,
+        'v': float,
+        'user_id': user_id,
+        'extended': extended,
+        'offset': offset,
+        'count': count,
+        'fields': fields,
+        'filter': filters
+    }
+    return res_two.make_request(method, params)
